@@ -1,0 +1,31 @@
+Номер 1
+#include <iostream> 
+using namespace std; 
+int main(){ 
+int a= 1; 
+float b = 1.201; 
+float pi=3.14; 
+float y; 
+ 
+y= pow(0.7/log(a/b)*pow(sin((a+b)*(pi/10)),2)+0.8*log(b/a)*pow(cos((a+b)*(pi/10)),2),3./2); 
+cout <<y; 
+return 0; 
+}
+
+Номер 2
+// Example program
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main()
+{
+    int a = 3;
+    float b = 0.523;
+    double y;
+    
+    y=pow((1.56*pow(sin(b), 1./2))/(0.8942* log(a)),1./4);
+    
+    cout << y;
+    return 0;
+}
