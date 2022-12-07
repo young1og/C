@@ -1,0 +1,40 @@
+#include <iostream>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+
+int main() {
+
+	int m = 5, n = 7;
+	int counter[5];
+	int array[5][7];
+
+	srand(time(NULL));
+	for (int a = 0; a < m; a++) {
+		counter[a] = 0;
+	}
+	for (int a = 0; a < m; a++) {
+		for (int b = 0; b < n; b++) {
+			array[a][b] = rand() % 10;
+		}
+	}
+	for (int a = 0; a < m; a++) {
+		for (int b = 0; b < n; b++) {
+			cout << array[a][b];
+			if (b == n - 1) {
+				cout << array[a][b] << endl;
+			}
+			else {
+				cout << array[a][b] << ", ";
+			}
+		}
+	}
+	for (int a = 0; a < m; a++) {
+		for (int b = 0; b < n; b++) {
+			counter[a] += array[a][b];
+		}
+	}
+	for (int a = 0; a < m; a++) {
+		cout << "sum elements in " << a + 1 << " row = " << counter[a] << endl;
+	}
+}
