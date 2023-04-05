@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <sstream>
+ 
+using namespace std;
+
+int main() {
+    map<string,string> values;
+    string value_str, template_str;
+
+    getline(cin, value_str);
+    getline(cin, template_str);
+
+    // Розділити рядок зі значеннями на пари name=value та додати їх у словник
+    istringstream iss(value_str);
+    string pair_str;
+    while (getline(iss, pair_str, ',')) {
+        size_t pos = pair_str.find('=');
+        string name = pair_str.substr(0, pos);
+        string value = pair_str.substr(pos + 1);
+        values[name] = value;
+    }
+
+    // Замінити всі входження [name] на відповідне значення
+    size_t start_pos = 0;
+    while ((start_pos = template_str.find('[', start_pos)) != string::npos) {
+     size_t end_pos = template_str.find(']', start_pos);
+     if (end_pos != string::npos) {
+     string name = template_str.substr(start_pos + 1, end_pos - start_pos - 1);
+     if (values.count(name) > 0) {
+     template_str.replace(start_pos, end_pos - start_pos + 1, values[name]);
+            }
+            else {
+                start_pos = end_pos + 1;
+            }
+        }
+        else {
+            break;
+        }
+    }
+
+    cout << template_str << endl;
+    return 0;
+}

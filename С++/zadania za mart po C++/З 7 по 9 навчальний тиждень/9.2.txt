@@ -1,0 +1,44 @@
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+bool is_valid_password(const string& password) {
+    if (password.length() < 8) {
+        return false;
+    }
+    bool has_uppercase = false;
+    bool has_lowercase = false;
+    bool has_digit = false;
+    bool has_special = false;
+    string special_chars = "!@#$%^&*()-_+=[]{}\\|;:',.<>/?";
+    for (char c : password) {
+        if (c >= 'A' && c <= 'Z') {
+            has_uppercase = true;
+        }
+        else if (c >= 'a' && c <= 'z') {
+            has_lowercase = true;
+        }
+        else if (c >= '0' && c <= '9') {
+            has_digit = true;
+        }
+        else if (special_chars.find(c) != string::npos) {
+            has_special = true;
+        }
+        else {
+            return false; // Недопустимый символ
+        }
+    }
+    return has_uppercase && has_lowercase && has_digit && has_special;
+}
+
+int main()
+{
+    string password;
+    getline(cin, password);
+
+    bool is_valid = is_valid_password(password);
+    cout << (is_valid ? "Valid password" : "Invalid password") << endl;
+
+    return 0;
+}
