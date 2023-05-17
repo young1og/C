@@ -1,0 +1,117 @@
+#include <iostream>
+#include <vector>
+
+struct Member {
+    int id;
+    std::string name;
+    int subscriptionMonths;
+};
+
+int findMemberIndex(const std::vector<Member>& members, int id) {
+    for (size_t i = 0; i < members.size(); ++i) {
+        if (members[i].id == id) {
+            return i;
+        }
+    }
+    return -1; // return -1 if member with the specified id is not found
+}
+
+void createMember(std::vector<Member>& members, int id, const std::string& name) {
+    if (id == 0) {
+        std::cout << "Cannot create a member with id 0." << std::endl;
+        return;
+    }
+
+    if (findMemberIndex(members, id) != -1) {
+        std::cout << "Member with the specified id already exists." << std::endl;
+        return;
+    }
+
+    if (members.size() >= 10) {
+        std::cout << "Maximum number of members reached." << std::endl;
+        return;
+    }
+
+    members.push_back({ id, name, 0 });
+}
+
+void deleteMember(std::vector<Member>& members, int id) {
+    int index = findMemberIndex(members, id);
+    if (index == -1) {
+        std::cout << "Member with the specified id was not found." << std::endl;
+        return;
+    }
+
+    members.erase(members.begin() + index);
+}
+
+void extendSubscription(std::vector<Member>& members, int id, int months) {
+    int index = findMemberIndex(members, id);
+    if (index == -1) {
+        std::cout << "Member with the specified id was not found." << std::endl;
+        return;
+    }
+
+    members[index].subscriptionMonths += months;
+}
+
+void cancelSubscription(std::vector<Member>& members, int id) {
+    int index = findMemberIndex(members, id);
+    if (index == -1) {
+        std::cout << "Member with the specified id was not found." << std::endl;
+        return;
+    }
+
+    members[index].subscriptionMonths = 0;
+}
+
+void printMembers(const std::vector<Member>& members) {
+    if (members.empty()) {
+        std::cout << "No members in the system." << std::endl;
+        return;
+    }
+
+    for (const auto& member : members) {
+        std::cout << "Member " << member.id << " : " << member.name << ", subscription valid for " << member.subscriptionMonths << " months." << std::endl;
+    }
+}
+
+int main() {
+    std::vector<Member> members;
+
+    while (true) {
+        std::string command;
+        std::cin >> command;
+
+        if (command == "create") {
+            int id;
+            std::string name;
+            std::cin >> id >> name;
+            createMember(members, id, name);
+        }
+        else if (command == "delete") {
+            int id;
+            std::cin >> id;
+            deleteMember(members, id);
+        }
+        else if (command == "extend") {
+            int id, months;
+            std::cin >> id >> months;
+            extendSubscription(members, id, months);
+        }
+        else if (command == "cancel") {
+            int id;
+            std::cin >> id;
+            cancelSubscription(members, id);
+        }
+        else if (command == "quit") {
+            break; 
+}
+else {
+std::cout << "Invalid command." << std::endl;
+}
+    printMembers(members);
+}
+
+return 0;
+}

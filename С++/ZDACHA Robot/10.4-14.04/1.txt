@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+    string occupation;
+    string address;
+    string email;
+};
+
+void print(Person* person) {
+    cout << person->name << " is " << person->age << " years old, and works as a " << person->occupation << "." << endl;
+    cout << "Address: " << person->address << endl;
+    cout << "Email: " << person->email << endl;
+}
+
+int main() {
+    Person person;
+    cout << "Enter name: ";
+    getline(cin, person.name);
+    cout << "Enter age: ";
+    cin >> person.age;
+    cin.ignore(); // ignore the newline character in the input buffer
+    cout << "Enter occupation: ";
+    getline(cin, person.occupation);
+    cout << "Enter address: ";
+    getline(cin, person.address);
+    cout << "Enter email: ";
+    getline(cin, person.email);
+
+    cout << "Meet " << person.name << ":" << endl;
+    print(&person);
+
+    return 0;
+}

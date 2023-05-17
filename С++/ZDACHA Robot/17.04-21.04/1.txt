@@ -1,0 +1,47 @@
+#include <iostream> 
+#include <string.h> 
+ 
+using namespace std; 
+ 
+class ShopItemOrder{ 
+     
+private: 
+    string name; 
+    double unitPrice; 
+    int numberOfItems; 
+ 
+public: 
+    ShopItemOrder(string name, double unitPrice, int numberOfItems); 
+    void get(); 
+    void set(string insertName, double insertUnitPrice, int insertNumberOfItems); 
+    double get_total_price(double insertUnitPrice, int insertNumberOfItems); 
+    void print_order(); 
+}; 
+ShopItemOrder::ShopItemOrder(string isertName,double insertUnitPrice,int insertNumberOfItems){ 
+    set(isertName,insertUnitPrice,insertNumberOfItems); 
+} 
+void ShopItemOrder::get(){ 
+    cout<< this-> name << '/' << this-> unitPrice << '/' << this-> numberOfItems <<'\n'; 
+} 
+void ShopItemOrder::set(string insertName, double insertUnitPrice, int insertNumberOfItems){ 
+    name = insertName; 
+    unitPrice = insertUnitPrice; 
+    numberOfItems = insertNumberOfItems; 
+} 
+double ShopItemOrder::get_total_price(double unitPrice, int numberOfItems){ 
+return unitPrice * numberOfItems; 
+} 
+void ShopItemOrder::print_order(){ 
+    cout<< this-> name << "\n Price: " << this-> unitPrice << "\n Quantity: " << this-> numberOfItems <<'\n'<< 
+    "\n Bag sum: "<< get_total_price(unitPrice,numberOfItems); 
+} 
+ 
+int main(){ 
+    int numberOfItems = 0; 
+ 
+    cout << "Number of item: "; 
+    cin >> numberOfItems; 
+    ShopItemOrder bag("\n iPhone.", 45000, numberOfItems); 
+    bag.print_order(); 
+    return 0; 
+}

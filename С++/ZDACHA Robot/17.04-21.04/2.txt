@@ -1,0 +1,46 @@
+#include <iostream> 
+ 
+using namespace std; 
+ 
+class FlightBooking { 
+     
+public: 
+    FlightBooking(int id, int capacity, int reserved); 
+    void printStatus(); 
+    void set(int id, int capacity, int reserved); 
+    void get(); 
+ 
+private: 
+    int id; 
+    int capacity; 
+    int reserved; 
+}; 
+void FlightBooking::printStatus() 
+{ 
+    cout << "Flight" << id << " : " << reserved << " / " << capacity << " ( " << double(reserved)/capacity*100 << "%) seats reserved "<< "\n"; 
+} 
+    FlightBooking::FlightBooking(int id, int capacity, int reserved) 
+{ 
+    set(id,capacity,reserved); 
+} 
+ 
+void FlightBooking::set(int inputId, int inputCapacity, int inputReserved){ 
+    id=inputId; 
+    capacity=inputCapacity; 
+    reserved=inputReserved; 
+} 
+void FlightBooking::get(){ 
+    cout << this->id << '/' << this->capacity << '/' << this->reserved << '\n'; 
+} 
+ 
+int main() { 
+    int reserved = 0; 
+    int capacity = 0; 
+    cout << "Provide flight capacity: "; 
+    cin >> capacity; 
+    cout << "Provide number of reserved seats: "; 
+    cin >> reserved; 
+    FlightBooking booking(1, capacity, reserved); 
+    booking.printStatus(); 
+    return 0; 
+}
